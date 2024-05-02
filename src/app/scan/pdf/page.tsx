@@ -1,11 +1,12 @@
 "use client"
 import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+
 
 const Pdf = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -20,7 +21,6 @@ const Pdf = () => {
     if (file) {
       setSelectedFile(file);
   
-      // Upload file to API and get preview image URL
       const formData = new FormData();
       formData.append('file', file);
   
@@ -33,19 +33,16 @@ const Pdf = () => {
           const data = await response.json();
           console.log(data);
           
-          // Decode base64 encoded image data
           const decodedImageData = atob(data.preview_image);
-          // Convert decoded data to Uint8Array
           const uint8Array = new Uint8Array(decodedImageData.length);
           for (let i = 0; i < decodedImageData.length; i++) {
             uint8Array[i] = decodedImageData.charCodeAt(i);
           }
-          // Create Blob from Uint8Array
           const blob = new Blob([uint8Array], { type: 'image/png' });
-          // Create object URL from Blob
           const imageUrl = URL.createObjectURL(blob);
   
           setPreviewImage(imageUrl);
+          setIsChecked(true);
         } else {
           const errorData = await response.json();
           console.error('Failed to upload file:', errorData);
@@ -56,10 +53,7 @@ const Pdf = () => {
     }
   };
   
-  
-
   const handleScanButtonClick = () => {
-    // Navigate to quiz page when scanning is done
     router.push('/quiz');
   };
 
@@ -93,10 +87,23 @@ const Pdf = () => {
             <div className="max-w-md mt-2 w-full flex justify-center">
               <button
                 onClick={handleScanButtonClick}
-                className="border-2 border-[#320083] rounded-2xl bg-[#F7C93D] py-5 px-7 w-full text-2xl text-black font-medium"
+                disabled={!isChecked} // Disable button if checkbox is not checked
+                className={`border-2 border-[#320083] rounded-2xl bg-[#F7C93D] py-5 px-7 w-full text-2xl text-black font-medium ${!isChecked && 'opacity-50 cursor-not-allowed'}`}
               >
                 Scan File
               </button>
+            </div>
+            <div className="flex items-center mt-4">
+              <input
+                type="checkbox"
+                id="agree"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+                className="mr-2"
+              />
+              <label htmlFor="agree" className="text-sm font-medium">
+                The submission is my own work, except where I have acknowledged<br></br>  the use of the works of other people.
+              </label>
             </div>
           </div>
         )}
