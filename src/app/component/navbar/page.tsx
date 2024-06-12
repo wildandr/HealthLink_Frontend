@@ -3,7 +3,7 @@ export default function Navbar() {
     return (
         <main className="sm:ml-64 bg-white">
         <div className="px-6 py-10 flex items-center">
-        <form className="rounded  w-2/3 ">
+        {/* <form className="rounded  w-2/3 ">
           <label
             htmlFor="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -35,8 +35,8 @@ export default function Navbar() {
               placeholder="Search Here"
             />
           </div>
-        </form>
-        <div className="flex items-center gap-14 max-w-[30rem] justify-end  w-full">
+        </form> */}
+        {/* <div className="flex items-center gap-14 max-w-[30rem] justify-end  w-full">
           <Image src="/comment.png" alt="Quiz" width={52} height={52} />
           <Image src="/alarm.png" alt="Quiz" width={42} height={42} />
           <a
@@ -46,7 +46,7 @@ export default function Navbar() {
             Premium
           </a>
           <Image src="/profile.png" alt="Quiz" width={52} height={52} />
-        </div>
+        </div> */}
       </div>
       </main>
     );
