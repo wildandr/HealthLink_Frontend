@@ -1,30 +1,23 @@
-"use client";
+"use client"
 import { useState } from "react";
 
-export default function Setting() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+export default function Record() {
+  const [doctorId, setDoctorId] = useState("");
+  const [patientId, setPatientId] = useState("");
+  const [record, setRecord] = useState("");
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
     const data = {
-      email: email,
-      role: "patient",
-      username: username,
-      password_hash: password,
+      patient_id: Number(patientId),
+      doctor_id: Number(doctorId),
+      record_details: record,
     };
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/users`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/patient_records`,
         {
           method: "POST",
           headers: {
@@ -40,73 +33,62 @@ export default function Setting() {
 
       const result = await response.json();
       console.log("Success:", result);
-      alert("User created successfully");
+      alert("Record added successfully");
 
       // Clear the form inputs after successful submission
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      setDoctorId("");
+      setPatientId("");
+      setRecord("");
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to create user");
+      alert("Failed to add record");
     }
   };
 
   return (
-    <div className="h-[92vh] sm:ml-64 bg-white">
-      <div className="bg-[#28a99e] h-full px-8 py-12 flex justify-center w-full">
-        <div className="w-full h-[70%] flex flex-col justify-center items-center rounded-xl bg-white">
-          <form className="px-8 w-full" onSubmit={handleSubmit}>
+    <main className="sm:ml-64 bg-[#28a99e] h-[100vh]">
+      <div className="px-8 py-12">
+        <div className="w-full max-w-full rounded-xl bg-white">
+          <form className="p-5" onSubmit={handleSubmit}>
             <div className="mb-5">
               <label className="block mb-2 text-lg font-medium text-gray-900">
-                Username
+                Doctor ID
               </label>
               <input
                 type="text"
-                id="username"
+                id="doctor_id"
+                value={doctorId}
+                onChange={(e) => setDoctorId(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder=""
                 required
               />
             </div>
             <div className="mb-5">
               <label className="block mb-2 text-lg font-medium text-gray-900">
-                Email
+                Patient ID
               </label>
               <input
-                type="email"
-                id="email"
+                type="text"
+                id="patient_id"
+                value={patientId}
+                onChange={(e) => setPatientId(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder=""
                 required
               />
             </div>
             <div className="mb-5">
               <label className="block mb-2 text-lg font-medium text-gray-900">
-                Password
+                Record
               </label>
               <input
-                type="password"
-                id="password"
+                type="text"
+                id="record"
+                value={record}
+                onChange={(e) => setRecord(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <div className="mb-5">
-              <label className="block mb-2 text-lg font-medium text-gray-900">
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder=""
                 required
               />
             </div>
@@ -115,12 +97,12 @@ export default function Setting() {
                 type="submit"
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                Submit
+                Add Record
               </button>
             </div>
           </form>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

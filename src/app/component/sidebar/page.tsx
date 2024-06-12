@@ -14,6 +14,18 @@ export default function Sidebar() {
     const handlePatientSetting = () => {
         router.push("/patient/setting");
     };
+    const handlePatientDashboard = () => {
+        router.push("/patient/dashboard");
+    };
+    const handleResearcher = () => {
+        router.push("/researcher");
+    };
+    const handleDoctor = () => {
+        router.push("/doctor");
+    };
+    const handleAdmin = () => {
+        router.push("/admin");
+    };
 return (
   <main>
     <button
@@ -131,6 +143,7 @@ return (
           <li>
             <a
               href="#"
+              onClick={handleResearcher}
               className="flex items-center p-2 text-gray-400 hover:text-gray-900 rounded-lg hover:bg-[#28a99e] group focus:border-2 focus:text-gray-900 focus:border-black"
             >
               <Image src="/user.png" alt="Quiz" width={22} height={22} />
@@ -140,6 +153,7 @@ return (
           <li>
             <a
               href="#"
+              onClick={handlePatientDashboard}
               className="flex items-center p-2 text-gray-400 hover:text-gray-900 rounded-lg hover:bg-[#28a99e] group focus:border-2 focus:text-gray-900 focus:border-black"
             >
               <Image src="/user.png" alt="Quiz" width={22} height={22} />
@@ -149,6 +163,7 @@ return (
           <li>
             <a
               href="#"
+              onClick={handleDoctor}
               className="flex items-center p-2 text-gray-400 hover:text-gray-900 rounded-lg hover:bg-[#28a99e] group focus:border-2 focus:text-gray-900 focus:border-black"
             >
               <Image src="/user.png" alt="Quiz" width={22} height={22} />
@@ -158,6 +173,7 @@ return (
           <li>
             <a
               href="#"
+              onClick={handleAdmin}
               className="flex items-center p-2 text-gray-400 hover:text-gray-900 rounded-lg hover:bg-[#28a99e] group focus:border-2 focus:text-gray-900 focus:border-black"
             >
               <Image src="/user.png" alt="Quiz" width={22} height={22} />

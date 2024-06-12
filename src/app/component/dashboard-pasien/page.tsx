@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   const handleScanButtonClick = () => {
-    router.push("/appointment");
+    router.push("/patient/appointment");
   };
   return (
     <div className="h-[92vh] sm:ml-64 bg-white">

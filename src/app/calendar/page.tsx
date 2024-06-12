@@ -25,7 +25,7 @@ export default function Scan() {
             </p>
           </button>
         </div>
-        <div className="w-full max-w-full rounded-xl bg-white ">
+        <div className="w-full max-w-full rounded-xl bg-white mt-10">
           <table className="w-full">
             <thead>
               <tr className="grid grid-cols-7 rounded-t-sm bg-primary text-blue-800">
