@@ -1,12 +1,14 @@
-"use client"
+"use client";
 import { useState } from "react";
 
 export default function Record() {
   const [doctorId, setDoctorId] = useState("");
   const [patientId, setPatientId] = useState("");
   const [record, setRecord] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     const data = {
@@ -33,7 +35,8 @@ export default function Record() {
 
       const result = await response.json();
       console.log("Success:", result);
-      alert("Record added successfully");
+      setAlertMessage("Record added successfully");
+      setIsSuccess(true);
 
       // Clear the form inputs after successful submission
       setDoctorId("");
@@ -41,7 +44,8 @@ export default function Record() {
       setRecord("");
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to add record");
+      setAlertMessage("Failed to add record");
+      setIsSuccess(false);
     }
   };
 
@@ -101,6 +105,18 @@ export default function Record() {
               </button>
             </div>
           </form>
+          {alertMessage && (
+            <div
+              className={`mt-5 p-4 text-sm ${
+                isSuccess
+                  ? "text-green-800 bg-green-100"
+                  : "text-red-800 bg-red-100"
+              } rounded-lg`}
+              role="alert"
+            >
+              {alertMessage}
+            </div>
+          )}
         </div>
       </div>
     </main>

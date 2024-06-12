@@ -12,19 +12,7 @@ export default function Scan() {
   return (
     <main className="sm:ml-64 bg-[#28a99e] h-[100vh]">
       <div className="  px-8 py-12 ">
-        <div className="border-2 border-[#320083] rounded-3xl bg-white p-5 mt-3 text-black flex items-center justify-between ">
-          <h1 className="font-medium text-xl">
-            Make appointment for your next checkup now!
-          </h1>
-          <button
-            className="border-[2.5px] border-[#320083] py-3 px-10 rounded-3xl bg-[#28a99e] hover:bg-[#39B46C] w-full max-w-[20rem]"
-            onClick={handleScanButtonClick}
-          >
-            <p className="font-semibold text-[#320083] text-xl ">
-              Make an appointment
-            </p>
-          </button>
-        </div>
+      
         <div className="w-full max-w-full rounded-xl bg-white mt-10">
           <table className="w-full">
             <thead>

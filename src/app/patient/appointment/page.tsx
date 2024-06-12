@@ -6,13 +6,15 @@ export default function Appointment() {
   const [doctorId, setDoctorId] = useState("");
   const [appointmentDate, setAppointmentDate] = useState("");
   const [appointmentTime, setAppointmentTime] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const appointmentData = {
       patient_id: 1, // This should be dynamically set based on actual data
-      doctor_id: parseInt(doctorId),
+      doctor_id: 1,
       appointment_time: `${appointmentDate} ${appointmentTime}`,
       status: "Scheduled",
     };
@@ -35,10 +37,12 @@ export default function Appointment() {
 
       const data = await response.json();
       console.log("Appointment created successfully:", data);
-      // Handle success (e.g., display a success message or redirect)
+      setAlertMessage("Appointment created successfully!");
+      setIsSuccess(true);
     } catch (error) {
       console.error("Error creating appointment:", error);
-      // Handle error (e.g., display an error message)
+      setAlertMessage("Failed to create appointment. Please try again.");
+      setIsSuccess(false);
     }
   };
 
@@ -60,22 +64,6 @@ export default function Appointment() {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 value={patientName}
                 onChange={(e) => setPatientName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="doctor_id"
-                className="block mb-2 text-lg font-medium text-gray-900"
-              >
-                Doctor ID
-              </label>
-              <input
-                type="number"
-                id="doctor_id"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                value={doctorId}
-                onChange={(e) => setDoctorId(e.target.value)}
                 required
               />
             </div>
@@ -120,6 +108,18 @@ export default function Appointment() {
               </button>
             </div>
           </form>
+          {alertMessage && (
+            <div
+              className={`mt-5 p-4 text-sm ${
+                isSuccess
+                  ? "text-green-800 bg-green-100"
+                  : "text-red-800 bg-red-100"
+              } rounded-lg`}
+              role="alert"
+            >
+              {alertMessage}
+            </div>
+          )}
         </div>
       </div>
     </main>
