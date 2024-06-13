@@ -1,12 +1,11 @@
-// root layout (RootLayout.tsx or RootLayout.jsx)
+// src/app/layout.tsx or src/app/RootLayout.tsx
 "use client";
 import { Poppins } from "next/font/google";
 import { useState } from "react";
 import "./globals.css";
 import Sidebar from "./component/sidebar/page";
 import Navbar from "./component/navbar/page";
-import Login from "./login/page";
-
+import Login from "./component/login";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,11 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
- 
+
   const handleLogin = () => {
-
     setIsLoggedIn(true);
-
   };
 
   return (

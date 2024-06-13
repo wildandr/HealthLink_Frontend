@@ -8,9 +8,6 @@ export default function Sidebar() {
     const handleHomeButtonClick = () => {
         router.push("/");
     };
-    const handleScanButtonClick = () => {
-        router.push("/calendar");
-    };
     const handlePatientSetting = () => {
         router.push("/patient/setting");
     };
@@ -87,16 +84,7 @@ return (
               <span className="ms-3">Patient Dashboard</span>
             </a>
           </li>
-          <li>
-            <a
-              href="#"
-              onClick={handleScanButtonClick}
-              className="flex items-center p-2 text-gray-400 hover:text-gray-900 rounded-lg hover:bg-[#28a99e] group focus:border-2 focus:text-gray-900 focus:border-black"
-            >
-              <Image src="/calendar.png" alt="Quiz" width={22} height={22} />
-              <span className="ms-3">Patient Calendar</span>
-            </a>
-          </li>
+
           {/* <li>
               <a
                 href="#" onClick={handleQuizButtonClick}
