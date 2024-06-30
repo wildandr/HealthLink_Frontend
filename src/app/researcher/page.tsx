@@ -46,7 +46,13 @@ export default function DashboardResearcher() {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setRecords(data);
+        // Transforming the data to match the required structure
+        const transformedData = data.map((item: any, index: number) => ({
+          No: index + 1,
+          Details: item.record_details,
+          "Last Update": item.last_update,
+        }));
+        setRecords(transformedData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

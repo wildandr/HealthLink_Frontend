@@ -28,7 +28,7 @@ export default function DashboardDoctor() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/doctor_dashboard`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/patient_dashboard`,
           {
             method: "GET",
             headers: {

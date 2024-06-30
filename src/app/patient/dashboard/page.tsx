@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 // Helper function to format date and time
 const formatDateTime = (dateTimeString: string | number | Date) => {
   const date = new Date(dateTimeString);
+  if (isNaN(date.getTime())) {
+    return "Invalid Date";
+  }
+
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
     month: "long",
@@ -40,6 +44,7 @@ export default function DashboardPatient() {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        console.log("Data fetched successfully:", data);
         setAppointments(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -95,7 +100,7 @@ export default function DashboardPatient() {
             </div>
             <div className="w-full flex justify-end mt-5">
               <button
-                type="submit"
+                type="button"
                 onClick={handlePatientAppointment}
                 className="text-white max-w-sm bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
